@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-​
+
     <title>栗原の恋占い</title>
-​
+
     <style>
       html {
         font-family: sans-serif;
@@ -16,8 +16,6 @@
         margin: 0 auto;
       }
       .lastResult {
-		 //このwhiteは恐らく必要ないです！！
-        color: white;
         padding: 3px;
       }
         .monguessField{
@@ -29,13 +27,13 @@
   }
     </style>
   </head>
-​
+
   <body>
     <h1>栗原陸の濃い占い</h1>
 
-​
+
     <p>あなたの運命の人を、私が占っちゃうぞ💘</p>
-​
+
     <div class="form">
       <label for="guessField">想い人の誕生日を入れてみて: </label>
       <input type="text" id="monguessField" class="monguessField">
@@ -44,55 +42,43 @@
       <label for"day">日</label>
       <input type="submit" value="注入💘" class="guessSubmit">
     </div>
-​
+
     <div class="resultParas">
-
-		/*結果出力のlastResultをHTML上に置いた方が良いと思います！
-		*<p class="lastResult"></p>
-		*/
-
+      <p class="lastResult"></p>
       <p class="guesses"></p>
     </div>
 
     <script>
       // Your JavaScript goes here
-var guesses = document.querySelector('.guesses');
-var lastResult = document.querySelector('.lastResult');
-​
-var guessSubmit = document.querySelector('.guessSubmit');
-var monguessField = document.querySelector('.monguessField');
-var dayguessField = document.querySelector('.dayguessField');
-​
-var resetButton;
+      var guesses = document.querySelector('.guesses');
+      var lastResult = document.querySelector('.lastResult');
 
-var checkGuess = function() {
-  var monGuess = Number(monguessField.value);
-  var dayGuess = Number(dayguessField.value);
-  if ((monGuess % 2 === 0) && (dayGuess % 2 === 0)) {
+      var guessSubmit = document.querySelector('.guessSubmit');
+      var monguessField = document.querySelector('.monguessField');
+      var dayguessField = document.querySelector('.dayguessField');
 
-	  //''これ抜けています！！
-    lastResult.textContent = 'おめでとうございます。お相手は運命の人です。;
-    setGameOver();
-  } else if ((monGuess % 2 === 0) || (dayGuess % 2 === 0)) {
-    lastResult.textContent = "相性は普通です";
-    setGameOver();
-  } else {
-    lastResult.textContent = "残念、ご縁はないでしょう";
-    setGameOver();
+      var resetButton;
 
-	  //ここのかっこ閉じ一度削除して、もう一度入力お願いしてもよろしいでしょうか
-    }
-  monguessField.value = ' ';
-  dayguessField.value = ' ';
-}
-​
-guessSubmit.addEventListener('click', checkGuess);
+      var checkGuess = function() {
+        var monGuess = Number(monguessField.value);
+        var dayGuess = Number(dayguessField.value);
+        if ((monGuess % 2 === 0) && (dayGuess % 2 === 0)) {
+          // ''これ抜けています！！
+          lastResult.textContent = 'おめでとうございます。お相手は運命の人です。';
+          // setGameOver();
+        } else if ((monGuess % 2 === 0) || (dayGuess % 2 === 0)) {
+          lastResult.textContent = "相性は普通です";
+          // setGameOver();
+        } else {
+          lastResult.textContent = "残念、ご縁はないでしょう";
+          // setGameOver();
+        }
 
-	//表示確認のためでしょうか。呼び出してると初期画面でlastResultに書き換え入っちゃいます
-checkGuess();
+        monguessField.value = ' ';
+        dayguessField.value = ' ';
+      }
 
-​
-​
+      guessSubmit.addEventListener('click', checkGuess);
     </script>
   </body>
 </html>
