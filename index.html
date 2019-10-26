@@ -1,84 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
+    <head>
+        <meta charset='utf-8'>
 
-    <title>栗原の恋占い</title>
+        <title>栗原の恋占い</title>
 
-    <style>
-      html {
-        font-family: sans-serif;
-      }
-      body {
-        width: 50%;
-        max-width: 800px;
-        min-width: 480px;
-        margin: 0 auto;
-      }
-      .lastResult {
-        padding: 3px;
-      }
-        .monguessField{
-    width:40px
-  }
+        <style>
+            html {
+                font-family: sans-serif;
+            }
+            body {
+                width: 50%;
+                max-width: 800px;
+                min-width: 480px;
+                margin: 0 auto;
+            }
+            .lastResult {
+                padding: 3px;
+            }
+            .monguessField{
+                width:40px
+            }
 
-  .dayguessField{
-    width:40px
-  }
-    </style>
-  </head>
+            .dayguessField{
+                width:40px
+            }
+        </style>
+    </head>
 
-  <body>
-    <h1>栗原陸の濃い占い</h1>
+    <body>
+        <h1>栗原陸の濃い占い</h1>
+        <p>あなたの運命の人を、私が占っちゃうぞ💘</p>
 
+        <div class='form'>
+            <label for='guessField'>想い人の誕生日を入れてみて: </label>
+            <input type='text' id='monguessField' class='monguessField'>
+            <label for='month'>月</label>
+            <input type='text' id='dayguessField' class='dayguessField'>
+            <label for'day'>日</label>
+            <input type='submit' value='注入💘' class='guessSubmit'>
+        </div>
 
-    <p>あなたの運命の人を、私が占っちゃうぞ💘</p>
+        <div class='resultParas'>
+            <p class='lastResult'></p>
+            <p class='guesses'></p>
+        </div>
 
-    <div class="form">
-      <label for="guessField">想い人の誕生日を入れてみて: </label>
-      <input type="text" id="monguessField" class="monguessField">
-      <label for="month">月</label>
-      <input type="text" id="dayguessField" class="dayguessField">
-      <label for"day">日</label>
-      <input type="submit" value="注入💘" class="guessSubmit">
-    </div>
+        <script>
+            // Your JavaScript goes here
+            var guesses = document.querySelector('.guesses');
+            var lastResult = document.querySelector('.lastResult');
 
-    <div class="resultParas">
-      <p class="lastResult"></p>
-      <p class="guesses"></p>
-    </div>
+            var guessSubmit = document.querySelector('.guessSubmit');
+            var monguessField = document.querySelector('.monguessField');
+            var dayguessField = document.querySelector('.dayguessField');
 
-    <script>
-      // Your JavaScript goes here
-      var guesses = document.querySelector('.guesses');
-      var lastResult = document.querySelector('.lastResult');
+            var resetButton;
 
-      var guessSubmit = document.querySelector('.guessSubmit');
-      var monguessField = document.querySelector('.monguessField');
-      var dayguessField = document.querySelector('.dayguessField');
+            var checkGuess = function() {
+                var monGuess = Number(monguessField.value);
+                var dayGuess = Number(dayguessField.value);
+                if ((monGuess % 2 === 0) && (dayGuess % 2 === 0)) {
+                // ''これ抜けています！！
+                lastResult.textContent = 'おめでとうございます。お相手は運命の人です。';
+                // setGameOver();
+                } else if ((monGuess % 2 === 0) || (dayGuess % 2 === 0)) {
+                lastResult.textContent = '相性は普通です';
+                // setGameOver();
+                } else {
+                lastResult.textContent = '残念、ご縁はないでしょう';
+                // setGameOver();
+                }
 
-      var resetButton;
+                monguessField.value = ' ';
+                dayguessField.value = ' ';
+            }
 
-      var checkGuess = function() {
-        var monGuess = Number(monguessField.value);
-        var dayGuess = Number(dayguessField.value);
-        if ((monGuess % 2 === 0) && (dayGuess % 2 === 0)) {
-          // ''これ抜けています！！
-          lastResult.textContent = 'おめでとうございます。お相手は運命の人です。';
-          // setGameOver();
-        } else if ((monGuess % 2 === 0) || (dayGuess % 2 === 0)) {
-          lastResult.textContent = "相性は普通です";
-          // setGameOver();
-        } else {
-          lastResult.textContent = "残念、ご縁はないでしょう";
-          // setGameOver();
-        }
-
-        monguessField.value = ' ';
-        dayguessField.value = ' ';
-      }
-
-      guessSubmit.addEventListener('click', checkGuess);
-    </script>
-  </body>
+            guessSubmit.addEventListener('click', checkGuess);
+        </script>
+    </body>
 </html>
