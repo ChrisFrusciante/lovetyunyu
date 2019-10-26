@@ -2,6 +2,7 @@ import Vue, { VueConstructor } from 'vue';
 import { QDialog, QDialogOptions, QCard, QCardSection, QSeparator, QCardActions, QBtn } from 'quasar';
 
 import ExtendableError from 'extendable-error';
+import shortid from 'shortid';
 
 import QQDialogSize, { QQDialogWidth } from '@/plugins/quasarApiCustomize/QQDialogSize';
 
@@ -89,13 +90,12 @@ export default {
 
     async component(this: Vue, dialogComponent: VueConstructor, props: any = {},
             needCard: boolean = true, size: QQDialogSize = 'small'): Promise<any> {
+        const id = shortid();
         let dialog: Vue;
 
         function removeDialog() {
-            console.log(dialog.$children[0]);
-            dialog.$children[0].$emit('ok', 'hoge');
-            // document.body.removeChild(dialog.$root.$el);
-            // dialog.$root.$destroy();
+            document.body.removeChild(dialog.$root.$el);
+            dialog.$root.$destroy();
         }
 
         return await this.$qqDialog.open({
@@ -107,15 +107,15 @@ export default {
                 },
                 methods: {
                     show(this: Vue) {
-                        (this.$refs['dialog'] as any).show();
+                        (this.$refs[`dialog-${id}`] as any).show();
                     },
                     hide(this: Vue) {
-                        (this.$refs['dialog'] as any).hide();
+                        (this.$refs[`dialog-${id}`] as any).hide();
                     },
                 },
                 render: (h) => {
                     return h('q-dialog', {
-                        ref: 'dialog',
+                        ref: `dialog-${id}`,
                         on: {
                             hide: () => {
                                 removeDialog();
@@ -141,7 +141,7 @@ export default {
                                     },
                                     on: {
                                         click: () => {
-                                            const d = dialog.$refs['dialog'] as any;
+                                            const d = dialog.$refs[`dialog-${id}`] as any;
                                             d.hide();
                                         },
                                     },
